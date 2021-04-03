@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All the datas</title>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css>
+    <style>
+        .jumbotron{
+            background-color: #f0ded2;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .journal > a{
+            color: black;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static "core/images/background.jpg" %}'); background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    
+    <div class="container-fluid">
+        <h1 class="text-left m-3"style="color: #f0ded2">Your Journal</h1>
+        <hr style="border:2px #f0ded2 solid;">
+        <div class="row">
+            <div class="col-2">
+                <a href="{% url 'dashboard' %}" class="btn btn-danger my-3">Cancel</a>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col">
+                        <div class="jumbotron">
+                               <div class="row m-2">
+                                {% for datas in data %}
+                                <div class="col-1 journal m-3 text-center">
+                                    <a href="{% url 'showjournal' datas.id %}">
+                                        <i class="fas fa-calendar-alt fa-3x"></i> <br>
+                                        {{datas.date}}
+                                    </a>
+                                </div>
+                                {% endfor %}
+                               </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

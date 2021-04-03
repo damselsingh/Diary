@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup here....</title>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        h2{
+            font-family: 'Lobster', cursive;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static "core/images/background.jpg" %}'); background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    <div class="col-7 m-5 mx-auto">
+        <div class="card" style="background: black;">
+            <h1 class="mx-auto"><img src="{% static 'core/images/logo.svg' %}" width="100px" alt="" class="bg-white m-3"></h1>
+            <h2 class="mx-auto text-white">Please Signup here.</h2>
+           <div class="card-body">
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+                {% for forms in form %}
+                <div class="form-group">
+                   <strong class="text-white">{{forms.label_tag}}</strong>
+                   {{forms}} 
+                   <h6 class="text-danger my-2">{{forms.errors|striptags}} </h6>
+                </div>
+                 {% endfor %}
+                 <p class="text-white">Or <a href="{% url 'home' %}" class="text-info">Login Here</a></p>
+                 <input type="submit" value="Submit" class="btn btn-outline-danger">
+                 
+           </form>
+           </div>
+        </div>
+
+    </div>
+</body>
+</html>

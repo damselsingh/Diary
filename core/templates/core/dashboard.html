@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasboard</title>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        .jumbotron{
+            background-color: #f0ded2;
+            border-radius: 40px;
+        }
+        .col > a, .form-group{
+            color: black;
+        }
+        h1 > a{
+            color: black;
+        }
+        h1{
+            font-family: 'Lobster', cursive;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static "core/images/background.jpg" %}'); background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    <div class="container-fluid">
+        <div class="row m-3">
+                <h1 class="text-left" style="color: #f0ded2">Dashboard</h1>
+                <h1 class="text-right ml-auto" title="logout"> <a href="{% url 'logout' %}"style="color: #f0ded2"><i class="fas fa-sign-out-alt"></i></a></h1>
+        </div>
+        <hr style="border:2px #f0ded2 solid;">
+        <div class="row">
+            <div class="col-md-6 h-25">
+                {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-danger alert-dismissible fade show" {% endif %}>
+                 <strong>{{message}}</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="jumbotron mt-0 alert-primary">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            {% csrf_token %}
+                        {% for forms in form %}
+                    <strong>{{forms.label_tag}}</strong>  <br>
+                    {{forms}} <br>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-danger">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6 h-25">
+                <div class="jumbotron">
+                    <p class="lead"> 
+                        <div class="alert alert-danger text-center">
+                        <i class="fas fa-smile-beam fa-2x" title="good"></i>
+                        <i class="fas fa-grin-squint-tears fa-2x" title="joyful"></i>
+                        <i class="fas fa-grin-wink fa-2x" title="great"></i>
+                        <i class="fas fa-tired fa-2x" title="exhausted"></i>
+                        <i class="fas fa-sad-tear fa-2x"title="not so good"></i>
+                        <i class="fas fa-sad-cry fa-2x" title="bad"></i>
+                        <i class="fas fa-grin-hearts fa-2x" title="flirty"></i>
+                        <i class="fas fa-angry fa-2x" title="angry"></i>
+                    </div></p>
+                    <hr >
+                    {% if not data %}
+                        <div class="text-center">
+                            {% include 'core/start.svg' %}
+                        </div>
+                    {% else %}
+                    <div class="row">
+                    {% for datas in data %}
+                        <div class="col mx-2 journal">
+                        <a href="{% url 'showjournal' datas.id %}"> 
+                            <i class="fas fa-calendar-alt fa-3x my-2"></i> <br> {{datas.date}}
+                        </a>
+                           
+                    </div> 
+                    {% endfor %}
+                </div>
+                    {% endif %}
+                    <div class="text-center">
+                        {% if count >= 5 %}
+                        <a href="{% url 'extra' %}" class="btn btn-outline-danger my-3">See more</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script src=https://code.jquery.com/jquery-3.3.1.slim.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js></script>
+</body>
+</html>

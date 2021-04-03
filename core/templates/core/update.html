@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update journal</title>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        .jumbotron{
+            background-color: #f0ded2;
+        }
+        h1{
+            font-family: 'Lobster', cursive;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static "core/images/background.jpg" %}'); background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    
+
+    <div class="container-fluid">
+            <h1 class="text-left m-3" style="color: #f0ded2">Update</h1>
+            <hr style="border:2px#f0ded2 solid;">
+            <div class="col">
+                <div class="jumbotron mt-0 alert-primary">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            {% csrf_token %}
+                        {% for form in forms %}
+                    <strong>{{form.label_tag}}</strong>  <br>
+                    {{form}} <br>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-danger font-weight-bold">Save</button>
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-dark font-weight-bold">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+</body>
+</html>

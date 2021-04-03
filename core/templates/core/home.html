@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: rgb(219, 226, 226);
+        }
+        .row{
+            background: white;
+            border-radius: 30px;
+            box-shadow: 12px 12px 22px grey;
+        }
+        .img-fluid{
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+        .form-control{
+            
+            border-radius: 40px 40px 40px 40px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-color: rgb(80, 78, 78);
+        }
+        h4{
+            font-family: 'Lobster', cursive;
+        }
+        
+        @media only screen and (max-width: 767px){
+            svg{
+                width: 280px;
+            }
+            
+        }
+        @media only screen and (min-width: 768px) and (max-width: 991px){
+
+        }
+    </style>
+</head>
+<body>
+
+<section class="Form my-5 mx-5">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                 <img src="{% static 'core/images/homepage.png' %}" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-6 px-5 pt-5">
+                {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-dark alert-dismissible fade show" {% endif %}>
+                 <strong>{{message}}</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+               <div class="card">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <img src="{% static 'core/images/logo.svg' %}" width="100px" class="my-3">
+                    <h4>Sign into your account</h4>
+
+                    {% if form.non_field_errors %}
+                    <ul class="alert alert-danger text-danger">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+
+                    {% for forms in form %}
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <strong>{{forms.label_tag}}</strong>
+                            {{forms}} 
+                            <h6 class="text-danger my-2">{{forms.errors|striptags}} </h6>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <input class="btn btn-outline-dark my-3 w-50" type="Submit" value="Login"> 
+                    <h6 class="text-black mt-3 mb-5"> New to DearDiary? <a href="{% url 'signup' %}" class="text-info">Create an Account</a></h6>
+                    </div>
+                </form>
+               </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    
+
+
+
+
+
+   
+
+    <script src=https://code.jquery.com/jquery-3.3.1.slim.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js></script>
+</body>
+</html>
