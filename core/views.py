@@ -20,7 +20,7 @@ def home(request):
                     return HttpResponseRedirect('/')
         else:
             form= LoginForm
-            return render(request, 'core/home.html', {'form':form})
+        return render(request, 'core/home.html', {'form':form})
     else:
         return HttpResponseRedirect('/dashboard/')
 
